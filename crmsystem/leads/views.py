@@ -55,3 +55,7 @@ def lead_update(request, pk):
 
     return render(request, 'leads/lead_update.html', context)
 
+def lead_delete(request, pk):
+    obj = Lead.objects.get(pk=pk)
+    obj.delete()
+    return redirect('/leads')
