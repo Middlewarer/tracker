@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
+{% extends "leads/base.html" %}
+
+{% block title %}
+Detail view of the {{data.first_name}}
+{% endblock title %}
+
+
+    {% block content %}
         <h1>{{data.first_name}}<h1>
-        <a href='/leads/{{data.id}}/delete'><h1>Delete this lead</h1></a>
-    </body>
-</html>
+        <a href='{% url 'leads:lead_delete' data.pk %}'><h1>Delete this lead</h1></a>
+        <a href="{% url 'leads:lead_update' data.pk %}"><h1>Update the lead</h1></a>
+{% endblock content %}

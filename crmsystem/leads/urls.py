@@ -4,9 +4,9 @@ from .views import LeadListView, lead_detail, lead_create, lead_update, lead_del
 app_name = 'leads'
 
 urlpatterns = [
-    path('', LeadListView.as_view(), name='home'),
-    path('create/', lead_create, name='create'),
-    path('<int:pk>/', lead_detail, name='detail'),
-    path('<int:pk>/update/', lead_update, name='update'),
-    path('<int:pk>/delete/', lead_delete, name='delete'),
+    path('', LeadListView.as_view(), name='lead_list'),
+    path('create/', lead_create, name='lead_create'),
+    path('<int:pk>/', lead_detail, name='lead_detail'),
+    path('<int:pk>/update/', lead_update, name='lead_update'),
+    path('<int:pk>/delete/', lead_delete, name='lead_delete'),
 ]
