@@ -16,14 +16,30 @@ def lead_detail(request, pk):
     return render(request, 'leads/lead_detail.html', context=context)
 
 def lead_create(request):
-    form = LeadModelForm()
+    agents = Agent.objects.all()
     if request.method == 'POST':
         form = LeadModelForm(request.POST)
         if form.is_valid():
-            form.save()
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            age = form.cleaned_data['age']
+            description = form.cleaned_data['description']
+            agent = form.cleaned_data['agent']
+
+            my_object = Lead(first_name=first_name,
+                             last_name=last_name,
+                             age=age,
+                             description=description,
+                             agent=agent)
+
+            my_object.save()
             return redirect('/leads')
+    else:
+        form = LeadModelForm()
+
     context = {
-        "form": form
+        "form": form,
+        "agents": agents
     }
     return render(request, 'leads/lead_create.html', context)
 

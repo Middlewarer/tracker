@@ -1,7 +1,9 @@
 from django import forms
-from .models import Lead
+from .models import Lead, Agent
 
-class LeadModelForm(forms.ModelForm):
-    class Meta:
-        model = Lead
-        fields = ['first_name', 'last_name', 'age', 'agent']
+class LeadModelForm(forms.Form):
+    name = forms.CharField(max_length=255)
+    last_name = forms.CharField(max_length=255)
+    age = forms.IntegerField()
+    description = forms.CharField(widget=forms.Textarea)
+    agent = forms.ModelChoiceField(queryset=Agent.objects.all())
