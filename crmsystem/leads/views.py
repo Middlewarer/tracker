@@ -3,11 +3,17 @@ from django.views import View
 from django.http import HttpResponse
 from .models import Lead
 from .forms import LeadModelForm
+from django.views.generic import TemplateView, ListView
 
 from .models import Lead, Agent
 
-def landing_page(request):
-    return render(request, 'leads/landing.html')
+class LandingPageView(TemplateView):
+    template_name = 'leads/landing.html'
+
+class LeadListView(ListView):
+    template_name = 'leads/lead_list.html'
+    queryset = Lead.objects.all()
+
 
 def lead_detail(request, pk):
     context = {
@@ -67,9 +73,3 @@ def lead_delete(request, pk):
     obj.delete()
     return redirect('leads:lead_list')
 
-def lead_list(request):
-    context = {
-        'leads': Lead.objects.all()
-    }
-
-    return render(request, 'leads/lead_list.html', context)
