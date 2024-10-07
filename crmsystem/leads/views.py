@@ -6,17 +6,8 @@ from .forms import LeadModelForm
 
 from .models import Lead, Agent
 
-class LeadListView(View):
-
-    template_name = "leads/lead_list.html"
-    
-    def get(self, request):
-        leads = Lead.objects.all()
-        context = {
-            'leads': leads
-        }
-
-        return render(request, self.template_name, context)
+def landing_page(request):
+    return render(request, 'leads/landing.html')
 
 def lead_detail(request, pk):
     context = {
@@ -58,4 +49,11 @@ def lead_update(request, pk):
 def lead_delete(request, pk):
     obj = Lead.objects.get(pk=pk)
     obj.delete()
-    return redirect('/leads')
+    return redirect('leads:lead_list')
+
+def lead_list(request):
+    context = {
+        'leads': Lead.objects.all()
+    }
+
+    return render(request, 'leads/lead_list.html', context)
