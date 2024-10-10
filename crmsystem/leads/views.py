@@ -20,11 +20,11 @@ class SignupView(generic.CreateView):
 
 
 class LandingPageView(generic.TemplateView):
-    template_name = "leads/landing.html"
+    template_name = "landing.html"
 
 
 def landing_page(request):
-    return render(request, "leads/landing.html")
+    return render(request, "landing.html")
 
 
 class LeadListView(LoginRequiredMixin, generic.ListView):
